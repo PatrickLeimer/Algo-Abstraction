@@ -3,6 +3,7 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+#include "abc.h"
 
 using namespace std;
 
@@ -54,7 +55,18 @@ vector<vector<int>> gsMatching(int n, vector<vector<int>> hospital_pref, vector<
     // result packaging
     vector<vector<int>> result;
     for (int h = 1; h <= n; h++) {
-        result.push_back({h, hospital_pairs[h]});
+        result.push_back({h, hospital_pairs[h]+1}); //After testing I realized out students became 0 indexed because of next idx. This is a duct taped solution
     }
     return result;
 }
+
+//Using example from the assignment page
+// int main(){
+//     vector<vector<int>> result = gsMatching(3, {{1,2,3},{2,3,1},{2,1,3}}, {{2,1,3},{1,2,3},{1,2,3}});
+//     for (auto i: result){
+//         for (auto j: i){
+//             cout<<j<<", ";
+//         }
+//         cout<<endl;
+//     }
+// }
