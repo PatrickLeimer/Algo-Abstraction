@@ -6,14 +6,14 @@
 #include <cmath>
 #include <algorithm>
 #include <chrono>
-
+#include <cstdlib>
 #include "abc.h"
 
 using namespace std;
 
 void testGen(int base, int exponent){
     /*
-    Generate tests using random numbers with an input size determined by params base^exponent (i)
+    Generate tests using random numbers with an input size determined by params base^exponent (i) 
     */
     for (int i = 1; i < exponent + 1; i++) { //iterate through exponents
         int n = pow(base, i);
@@ -24,10 +24,10 @@ void testGen(int base, int exponent){
 
         int randNum = 1;
 
-        vector<int> hospital_List;
-        vector<int> student_List;
-
         for (int j = 0; j < n; j++) { //fills hospital and student pref with randomly generated nxn grids. 
+
+            vector<int> hospital_List;
+            vector<int> student_List;
 
             unordered_set <int> taken_Student;
             unordered_set <int> taken_Hospital;
@@ -35,13 +35,17 @@ void testGen(int base, int exponent){
             for (int k = 0; k < n; k++) {
 
                 while (taken_Student.count(randNum)){
-                    int randNum = rand() % n + 1;
+                    randNum = rand() % n + 1;
                 }
+                taken_Student.insert(randNum);
                 hospital_List.push_back(randNum);
 
+                randNum = rand() % n + 1;
+
                 while (taken_Hospital.count(randNum)){
-                    int randNum = rand() % n + 1;
+                    randNum = rand() % n + 1;
                 }
+                taken_Hospital.insert(randNum);
                 student_List.push_back(randNum);
             }
 

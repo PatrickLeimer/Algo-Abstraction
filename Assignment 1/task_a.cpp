@@ -61,12 +61,12 @@ vector<vector<int>> gsMatching(int n, vector<vector<int>> hospital_pref, vector<
 }
 
 //Using example from the assignment page
-int main(){
-    vector<vector<int>> result = gsMatching(3, {{1,2,3},{2,3,1},{2,1,3}}, {{2,1,3},{1,2,3},{1,2,3}});
-    for (auto i: result){
-        for (auto j: i){
-            cout<<j<<", ";
-        }
-        cout<<endl;
-    }
-}
+// int main(){
+//     vector<vector<int>> result = gsMatching(3, {{1,2,3},{2,3,1},{2,1,3}}, {{2,1,3},{1,2,3},{1,2,3}});
+//     for (auto i: result){
+//         for (auto j: i){
+//             cout<<j<<", ";
+//         }
+//         cout<<endl;
+//     }
+// }
