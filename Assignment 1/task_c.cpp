@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <chrono>
 #include <cstdlib>
-#include "abc.h"
+#include "cli.h"
 
 using namespace std;
 
@@ -68,7 +68,9 @@ void testGen(int base, int exponent){
     return;
 }
 
+#ifdef TASK_C_STANDALONE
 int main() {
     testGen(2, 4);
     return 0;
 }
+#endif

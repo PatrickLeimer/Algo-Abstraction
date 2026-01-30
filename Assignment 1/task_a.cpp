@@ -3,7 +3,7 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
-#include "abc.h"
+#include "cli.h"
 
 using namespace std;
 
@@ -70,3 +70,62 @@ vector<vector<int>> gsMatching(int n, vector<vector<int>> hospital_pref, vector<
 //         cout<<endl;
 //     }
 // }
+
+#ifdef TASK_A_STANDALONE
+int main(int argc, char** argv) {
+    string infilePath = "exampleIN.txt";
+    string outfilePath = "exampleOUT.txt";
+
+    if (argc >= 2) infilePath = argv[1];
+    if (argc >= 3) outfilePath = argv[2];
+
+    ifstream infile(infilePath);
+    if (!infile.is_open()) {
+        cout << "INVALID: could not read input file: " << infilePath << endl;
+        return 0;
+    }
+
+    int n;
+    if (!(infile >> n) || n <= 0) {
+        cout << "INVALID: could not read n from input file: " << infilePath << endl;
+        return 0;
+    }
+
+    vector<vector<int>> hospital_pref(n, vector<int>(n));
+    vector<vector<int>> student_pref(n, vector<int>(n));
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            infile >> hospital_pref[i][j];
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            infile >> student_pref[i][j];
+        }
+    }
+
+    infile.close();
+
+    vector<vector<int>> result = gsMatching(n, hospital_pref, student_pref);
+
+    ofstream outfile(outfilePath);
+    if (!outfile.is_open()) {
+        cout << "INVALID: could not write output file: " << outfilePath << endl;
+        return 0;
+    }
+
+    for (const auto &pair : result) {
+        outfile << pair[0] << " " << pair[1] << "\n";
+    }
+
+    cout << "Matching pairs:" << endl;
+    for (const auto &pair : result) {
+        cout << pair[0] << " " << pair[1] << endl;
+    }
+
+    outfile.close();
+    return 0;
+}
+#endif
