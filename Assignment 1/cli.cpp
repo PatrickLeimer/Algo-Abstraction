@@ -130,7 +130,8 @@ int main(int argc, char** argv) {
         }
         int base = stoi(argv[2]);
         int exponent = stoi(argv[3]);
-        testGen(base, exponent);
+        testMatching(base, exponent);
+        testVerifying(base, exponent);
         return 0;
     }
 
