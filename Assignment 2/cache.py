@@ -21,11 +21,21 @@ class FIFO:
         self.miss_count +=1
         return False
 
-class LRU:
+class LRU: #I would normaly do a linked list with a hashmap for this, Ill just change the postion on the list
     def __init__(self, k):
         self.cache = []
         self.miss_count = 0
         self.k = k
 
     def request(self, r):
-        pass
+        if r in self.cache:
+            self.cache.remove(r)
+            self.cache.append(r)
+            return True
+        
+        if len(self.cache) == self.k:
+            self.cache.pop(0)
+            
+        self.cache.append(r)
+        self.miss_count += 1
+        return False
