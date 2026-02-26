@@ -22,6 +22,10 @@ class FIFO:
         self.set.add(r)
         self.miss_count +=1
         return False
+    
+    def handleRequests(self, rl): #rl is supposed to be the list with requests
+        for r in rl:
+            self.request(r)
 
 class LRU: #I would normaly do a linked list with a hashmap for this, Ill just change the postion on the list
     def __init__(self, k):
@@ -42,5 +46,29 @@ class LRU: #I would normaly do a linked list with a hashmap for this, Ill just c
         self.miss_count += 1
         return False
     
+    def handleRequests(self, rl): 
+        for r in rl:
+            self.request(r)
+    
 class OPTFF: #This approach uses information from future requests, so all requests must be handled/looked at at the same time
-    pass
+    def __init__(self, k):
+        self.cache = []
+        self.miss_count = 0
+        self.k = k
+
+    # def computeDistances(self, rl):
+    #     for i <  lenrl:
+    #         for
+
+    def handleRequests(self, rl):
+        for i  in range(len(rl)):
+            r = rl[i]
+            if r in self.cache:
+                continue
+                
+            if len(self.cache) == self.k:
+                max = 0
+                value = 0
+                for j in range(i, len(rl)):
+                    if rl[j] 
+
