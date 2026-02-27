@@ -1,8 +1,6 @@
 from pathlib import Path
 from queue import Queue
-
-
-#TODO: Add a function to FIFO and LRU that handles the entire list of requests. 
+ 
 class FIFO:
     def __init__(self, k):
         self.k = k
