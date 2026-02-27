@@ -1,4 +1,4 @@
-#I dont know how to do linked lists in python
+from pathlib import Path
 from queue import Queue
 
 
@@ -72,7 +72,7 @@ class OPTFF: #This approach uses information from future requests, so all reques
             max_dist = -1
             value = None
 
-            for s in self.ache: #n^2 ahh
+            for s in self.cache: #n^2 ahh
                 try: #trying to avoid out of range exceptions
                     j = rl.index(s, i + 1)
                     dist = j - i
@@ -85,9 +85,52 @@ class OPTFF: #This approach uses information from future requests, so all reques
                 
             self.cache.remove(value)
             self.cache.append(r)
-            
-                
-           
+
+
+def parseInputFile(path):
+    tokens = path.read_text().split()
+
+    k = int(tokens[0])
+    m = int(tokens[1])
+    reqTokens = tokens[2:]
+    rl = list(map(int, reqTokens[:m]))
+
+    return k, m, rl
+
+def runCaches(k, rl):
+    fifo = FIFO(k)
+    lru = LRU(k)
+    opt = OPTFF(k)
+
+    fifo.handleRequests(rl)
+    lru.handleRequests(rl)
+    opt.handleRequests(rl)
+
+    return (
+        f"FIFO  : {fifo.miss_count}\n"
+        f"LRU   : {lru.miss_count}\n"
+        f"OPTFF : {opt.miss_count}\n"
+    )
+
+def main():
+    here = Path(__file__).resolve().parent
+    in_files = sorted(here.glob("*.in"))
+
+    if not in_files:
+        print("No .in files found in:", here)
+        return
+
+    for in_path in in_files:
+        out_path = in_path.with_suffix(".out")
+        k, m, rl = parseInputFile(in_path)
+        output = runCaches(k, rl)
+        out_path.write_text(output)
+        print(f"Wrote {out_path.name} (from {in_path.name})")
+
+if __name__ == "__main__":
+    main()          
+
+#Note for Patrick: Question 3 looks like a variation of the exchange proof we saw in class but for caching instead           
             
                 
                     
