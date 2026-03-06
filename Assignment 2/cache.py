@@ -129,7 +129,29 @@ if __name__ == "__main__":
     main()          
 
 #Note for Patrick: Question 3 looks like a variation of the exchange proof we saw in class but for caching instead           
-            
-                
-                    
 
+
+'''
+Question 1:
+Input File | k |  m  | FIFO  |  LRU | OPTFF | 
+    Ex     | 5 | 60  |  27   |  30  |  19   |
+    Ex1    | 3 | 200 |	159  |  164 |  98   |
+    Ex2    | 8 | 100 |	 47  |  56  |  26   |
+
+'''
+
+'''
+Question 2:
+k = 3
+Set of requests = {1,2,3,4,1,2,3,4}
+| k |  m  | FIFO  |  LRU | OPTFF | 
+| 3 |  8  |   8   |   8  |   5   |
+OPTFF has the least misses because it can look into the future and see that 1,2,3 will be requested again before 4, so it can evict 4 instead of 1,2 or 3. 
+FIFO and LRU will both evict 1,2 or 3 at some point and then have to miss on them again when they are requested later on.
+'''
+
+'''
+Question 3:
+
+
+'''
