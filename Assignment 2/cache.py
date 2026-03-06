@@ -130,7 +130,7 @@ if __name__ == "__main__":
 
 #Note for Patrick: Question 3 looks like a variation of the exchange proof we saw in class but for caching instead           
 
-
+# Created just randomly the .in files with varied input sizes and k sizes 
 '''
 Question 1:
 Input File | k |  m  | FIFO  |  LRU | OPTFF | 
@@ -140,6 +140,7 @@ Input File | k |  m  | FIFO  |  LRU | OPTFF |
 
 '''
 
+# Just used a cased that proved the statement wrong
 '''
 Question 2:
 k = 3
@@ -152,6 +153,21 @@ FIFO and LRU will both evict 1,2 or 3 at some point and then have to miss on the
 
 '''
 Question 3:
+Let OPTFF be Belady’s Farthest-in-Future algorithm.
+Let ( A ) be any offline algorithm that knows the full request sequence.
+Prove that the number of misses of OPTFF is no larger than that of ( A ) on any fixed sequence.
 
-
+Proof (by contradiction):
+- Assume OPTFF is not optimal, in this case, that the number of misses of OPTFF is larger than that of an optimal offline algorithm A* on a fixed sequence.
+- Let $i_1, i_2,... be OPTFF's evictions (upon missing), and let j_1, j_2,... be those evictions of an optimal offline algorithm A*.
+- Choose A* so that i_1=j_1, i_2=j_2, ..., i_r=j_r for the largest possible r.
+- At the first difference (r+1), both algorithms are in the same cache state and experience a miss. 
+OPTFF evicts i_{r+1} (farthest next use), and A* evicts j_{r+1}.
+- Define A' to be the same as A* except it evicts the same as OPTFF i_{r+1}.
+- Since i_{r+1} is requested no earlier than j_{r+1}, this exchange cannot increase future misses.
+- Thus A' is still optimal (number of misses is no larger than A*) but agrees with OPTFF for at least r+1 steps, 
+contradicting the maximum of r, making OPTFF optimal.
 '''
+
+# Comment for Julio, you are right, it uses the same proof as the exchange proof we saw in class, but for caching instead of scheduling. 
+# I just changed the names of the algorithms and the evictions instead of the scheduled jobs.
