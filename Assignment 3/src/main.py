@@ -47,12 +47,21 @@ def hvlcs(A, B, xDict):
     return dp[m][n], "".join(solution)
 
 
+def hvlcs_all():
+    assignment_dir = Path(__file__).resolve().parent.parent
+    in_files = sorted(assignment_dir.rglob("*.in"))
+
+    for in_file in in_files:
+        _, sA, sB, xDict = parseInputFile(in_file)
+        max_val, subseq = hvlcs(sA, sB, xDict)
+
+        out_file = in_file.with_suffix(".out")
+        out_file.write_text(f"{max_val}\n{subseq}\n")
+        print(f"{in_file.name} -> {out_file.name}  (value={max_val}, subseq={subseq})")
+
+
 if __name__ == "__main__":
-    path = Path(__file__).resolve().parent.parent / "example.in"
-    k, sA, sB, xDict = parseInputFile(path)
-    max_val, subseq = hvlcs(sA, sB, xDict)
-    print(max_val)
-    print(subseq)
+    hvlcs_all()
 
 
     """
