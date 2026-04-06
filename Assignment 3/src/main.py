@@ -68,7 +68,22 @@ if __name__ == "__main__":
     hvlcs_all()
 
 
-    """
+    """ 
+                {
+                | 0 
+    OPT (i,j) = | OPT (i-1, j-1) + v(sA[i-1])
+                | max(OPT (i-1, j), OPT (i, j-1))
+                {
+
+                
+      ""   a    a    c    b
+  ""   0   0    0    0    0
+   c   0   0    0    5    5
+   a   0   2    2    5    5
+   a   0   2    4    5    5
+   b   0   2    4    5    9
+
+    Question 2: Recurrence Equation - computes the HVLCS 
     dp[i][j] = max value of a common subsequence of sA[0..i-1] and sB[0..j-1]
 
     Recurrence:
@@ -78,4 +93,9 @@ if __name__ == "__main__":
             dp[i][j] = max(dp[i-1][j], dp[i][j-1])
 
     Base case: dp[0][j] = dp[i][0] = 0 for all i, j
+
+    When two characters match, we extend the best solution found so far by including that character's value; when they don't, 
+    we take the best solution achievable by skipping one character from either string
+    covering all possible cases exhaustively.
+
     """
