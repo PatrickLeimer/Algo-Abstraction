@@ -1,3 +1,4 @@
+import time
 from pathlib import Path
 
 
@@ -53,11 +54,14 @@ def hvlcs_all():
 
     for in_file in in_files:
         _, sA, sB, xDict = parseInputFile(in_file)
+
+        start = time.perf_counter()
         max_val, subseq = hvlcs(sA, sB, xDict)
+        elapsed = time.perf_counter() - start
 
         out_file = in_file.with_suffix(".out")
         out_file.write_text(f"{max_val}\n{subseq}\n")
-        print(f"{in_file.name} -> {out_file.name}  (value={max_val}, subseq={subseq})")
+        print(f"{in_file.name}: |A|={len(sA)}, |B|={len(sB)}, runtime={elapsed:.6f}s, value={max_val}, subseq={subseq}")
 
 
 if __name__ == "__main__":
