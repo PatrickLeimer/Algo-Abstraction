@@ -98,4 +98,8 @@ if __name__ == "__main__":
     we take the best solution achievable by skipping one character from either string
     covering all possible cases exhaustively.
 
+    Question 3: Time Complexity 
+    The runtime of the algorithm is O(m*n) where m and n are the lengths of sA and sB respectively. 
+    This is because we fill a 2D table of size (m+1) x (n+1) and each cell requires O(1) time to compute.
+
     """
